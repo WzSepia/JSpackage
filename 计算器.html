@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../dist/css/base.css" />
+		<style type="text/css">
+			.box {
+				width: 400px;
+				height: 400px;
+				border: 1px sienna solid;
+				border-radius: 4px;
+			}
+
+			input {
+				width: 100%;
+				height: 35px;
+				background-color: #000000;
+				color: #FFFFFF;
+				font-size: 30px;
+			}
+
+			table {
+				width: 100%;
+				height: calc(100% - 35px);
+			}
+
+			td {
+				width: 50px;
+				height: 50px;
+				text-align: center;
+				cursor: pointer;
+				background-color: #333333;
+				color: #FFFFFF;
+				font-size: 35px;
+				font-weight: bold;
+			}
+
+			button {
+				width: auto;
+				height: 35px;
+				right: 0;
+				top: 0;
+				padding: 0 6px;
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<div class="posr">
+				<input type="text" value="" />
+				<button type="button" class="posa" onclick="reset()">清除</button>
+			</div>
+			<table border="true">
+				<tbody>
+					<tr>
+						<td class="num">1</td>
+						<td class="num">2</td>
+						<td class="num">3</td>
+						<td class="btn">+</td>
+					</tr>
+					<tr>
+						<td class="num">4</td>
+						<td class="num">5</td>
+						<td class="num">6</td>
+						<td class="btn">-</td>
+					</tr>
+					<tr>
+						<td class="num">7</td>
+						<td class="num">8</td>
+						<td class="num">9</td>
+						<td class="btn">*</td>
+					</tr>
+					<tr>
+						<td class="num">0</td>
+						<td class="num">.</td>
+						<td class="equalTo">=</td>
+						<td class="btn">/</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<script type="text/javascript">
+			var input = document.querySelector("input");
+			var table = document.querySelector("table");
+			var num1 = "",
+				num2 = "",
+				str = "",
+				active = "",
+				totle = 0;
+			table.onclick = function(ev) {
+				var e = ev || event;
+				var target = e.target;
+				var cls = target.className;
+				var td = target.innerText;
+				if (cls == "num") {
+					if (!active) {
+						num1 += td;
+					} else if (active) {
+						num2 += td;
+					}
+					input.value = num1 + active + num2;
+				} else if (cls == "btn") {
+					if (!num2) {
+						active = td;
+						input.value = num1 + active;
+					} else {
+						compute(td);
+						active = td;
+					}
+				} else if (cls == "equalTo") {
+					compute("");
+				}
+			}
+
+			function compute(td) {
+				if (num1.length == 0) return;
+				if (num2.length == 0) return;
+				num1 = Number(num1);
+				num2 = Number(num2);
+				switch (active) {
+					case "+":
+						totle = (num1 + num2);
+						break;
+					case "-":
+						totle = (num1 - num2);
+						break;
+					case "*":
+						totle = (num1 * num2);
+						break;
+					case "/":
+						totle = (num1 / num2);
+						break;
+					default:
+						break;
+				}
+				input.value = Number(totle) + td;
+				num1 = totle;
+				num2 = "";
+			}
+
+			function reset() {
+				num1 = num2 = active = "";
+				totle = 0;
+				input.value = "";
+			}
+		</script>
+	</body>
+</html>

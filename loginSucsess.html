@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+		<style type="text/css">
+			.a{
+				background-color: #46F2C7;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="a" ondrop="drop(event)" ondragover="allowDrop(event)">到这</div>
+		<h1 id="bb" class="b" draggable="true" ondragstart="drag(event)">登陆成功</h1>
+		<script type="text/javascript">
+			function allowDrop(ev){
+				ev.preventDefault();
+			}
+			
+			function drag(ev){
+				console.log(ev);
+				ev.dataTransfer.setData("text",ev.target.id);
+			}
+			
+			function drop(ev){
+				ev.preventDefault();
+				var data = ev.dataTransfer.getData("text");
+				ev.target.appendChild(document.getElementById(data));
+				console.log(ev.dataTransfer);
+			}
+		</script>
+	</body>
+</html>

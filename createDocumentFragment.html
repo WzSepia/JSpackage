@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>createDocumentFragment</title>
+	</head>
+	<body>
+		<div class="box">
+			
+		</div>
+		<button type="button" onclick="add()">添加</button>
+		<script type="text/javascript">
+			var box = document.querySelector(".box");
+			var html = document.createDocumentFragment();
+			function add(){
+				var h1 = document.createElement("h1");
+				h1.innerText = "createDocumentFragment";
+				box.appendChild(h1);
+			}
+		</script>
+	</body>
+</html>

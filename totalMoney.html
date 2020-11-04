@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title></title>
+	</head>
+	<body>
+		<ul></ul>
+		<p>总金额:<span class="money"></span>元</p>
+		<button type="button" class="reture">返回</button>
+		<script type="text/javascript">
+			window.onload = function() {
+				var cartData = parent.window.cartArr;
+				var totalMoney = parent.window.totalMoney;
+				console.log("弹窗", cartData);
+				var html = "";
+				for (var i in cartData) {
+					html += '<li><span>' + cartData[i].name + ':</span>' +
+						'<span class="num">' + cartData[i].num + '*' + cartData[i].price + '</span>' +
+						'<span>***************</span>' +
+						'<span class="totle">' + (cartData[i].num * cartData[i].price) + '</span>元</li>'
+				}
+				document.querySelector("ul").innerHTML = html;
+				document.querySelector('.money').innerText = totalMoney;
+
+				document.querySelector(".reture").onclick = function() {
+					parent.document.querySelector(".mask").style.display = "none";
+					parent.document.querySelector(".totalMoney").setAttribute("src", "");
+				}
+			}
+		</script>
+	</body>
+</html>

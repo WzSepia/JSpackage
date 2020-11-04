@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>原生轮播</title>
+		<link rel="stylesheet" type="text/css" href="../dist/css/base.css" />
+		<style type="text/css">
+			.box {
+				width: 500px;
+				height: 500px;
+				position: relative;
+				overflow: hidden;
+			}
+
+			.lists {
+				width: 100%;
+				height: 100%;
+				border: 10px solid #46F2C7;
+				left: 0;
+				top: 0;
+			}
+
+			.li {
+				display: none;
+				position: absolute;
+				width: 500px;
+				height: 500px;
+				line-height: 500px;
+				box-sizing: border-box;
+				float: left;
+				text-align: center;
+				font-size: 150px;
+				font-weight: bold;
+				background-color: #46F2C7;
+				transition: all .2s linear 0s;
+			}
+
+			.li:first-child {
+				display: block;
+			}
+
+			.btn {
+				width: 35px;
+				height: 50px;
+				background-color: #000000;
+				color: #F2F2F2;
+				font-size: 30px;
+				font-weight: bold;
+				position: absolute;
+				top: 50%;
+				transform: translate(-50% -50%);
+				cursor: pointer;
+				transition: all 200ms linear 0s;
+			}
+
+			.show {
+				opacity: 1;
+			}
+
+			.btn:hover {
+				background-color: #FF6600;
+			}
+
+			.btnLeft {
+				left: 10px;
+			}
+
+			.btnRight {
+				right: 10px;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="box">
+			<ul class="lists">
+				<li class="li">car1</li>
+				<li class="li">rou2</li>
+				<li class="li">sel3</li>
+				<li class="li">car4</li>
+				<li class="li">rou5</li>
+				<li class="li">sel6</li>
+			</ul>
+			<button class="btn btnLeft">左</button>
+			<button class="btn btnRight">右</button>
+		</div>
+		<script type="text/javascript">
+			/**
+			 * 轮播方法
+			 * @param dom:元素(输入Class值)
+			 * author wz
+			 * date:2020/10/23
+			 * */
+			var carrousel = {
+				index: 0,
+				time: null,
+				init: function(dom) {
+					if (!dom) return;
+					var lis = dom.querySelectorAll("li"); //轮播元素
+					var len = lis.length; //元素个数
+					time = setInterval(function() {
+						autoPlay(lis, len)
+					}, 1000);
+					dom.onmouseover = function() {
+						clearInterval(time);
+					};
+					dom.onmouseout = function() {
+						time = setInterval(function() {
+							autoPlay(lis, len)
+						}, 1000);
+					};
+					document.querySelector(".btnLeft").onclick = function() {
+						index--;
+						changeLi(lis, len);
+					};
+					document.querySelector(".btnRight").onclick = function() {
+						index++;
+						changeLi(lis, len);
+					};
+				},
+				changeLi: function(lis, len) {
+					lis.forEach(function(val) {
+						val.style.display = "none"
+					});
+					if (index < 0) {
+						index = (len - 1);
+						lis[index].style.display = "block";
+					} else if (index > (len - 1)) {
+						index = 0;
+						lis[index].style.display = "block";
+					} else {
+						lis[index].style.display = "block";
+					}
+				},
+				autoPlay: function(lis, len) {
+					index++;
+					changeLi(lis, len);
+				}
+			};
+
+			var index = 0; //索引
+			var time = null; //计时器
+			function scroll(dom) {
+				if (!dom) return;
+				var lis = dom.querySelectorAll("li"); //轮播元素
+				var len = lis.length; //元素个数
+				time = setInterval(function() {
+					autoPlay(lis, len)
+				}, 1000);
+				dom.onmouseover = function() {
+					clearInterval(time);
+				};
+				dom.onmouseout = function() {
+					time = setInterval(function() {
+						autoPlay(lis, len)
+					}, 1000);
+				};
+				document.querySelector(".btnLeft").onclick = function() {
+					index--;
+					changeLi(lis, len);
+				};
+				document.querySelector(".btnRight").onclick = function() {
+					index++;
+					changeLi(lis, len);
+				};
+			}
+			/**
+			 * 切换（改变index）
+			 * */
+			function changeLi(lis, len) {
+				lis.forEach(function(val) {
+					val.style.display = "none"
+				});
+				if (index < 0) {
+					index = (len - 1);
+					lis[index].style.display = "block";
+				} else if (index > (len - 1)) {
+					index = 0;
+					lis[index].style.display = "block";
+				} else {
+					lis[index].style.display = "block";
+				}
+			}
+			/**
+			 * 自动轮播
+			 * */
+			function autoPlay(lis, len) {
+				index++;
+				changeLi(lis, len);
+			}
+			/**
+			 * 启动
+			 * */
+			scroll(document.querySelector(".box"));
+		</script>
+	</body>
+</html>
