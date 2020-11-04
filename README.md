@@ -15,3 +15,12 @@ js插件封装
 
 文档碎片
 	document.createDocumentFragment()
+	
+输出字符串中出现最多的字符以及次数
+
+输出字符串字节数
+
+不借助任何第三方变量，实现整数交换
+
+ajaxDemo
+

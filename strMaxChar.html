@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>输出字符串中出现最多的字符以及次数</title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			var str = "qwewweqeqwqewqeqeqweqeqeqwwerm"
+			var o = {};
+			var arr = [];
+			var max = 0;
+			var maxChar = null;
+			arr = str.split("");
+			arr.forEach(function(val, index) {
+				if (!o[val]) {
+					o[val] = 1;
+				} else {
+					o[val] += 1;
+				}
+			})
+			for (var i in o) {
+				if (max < o[i]) {
+					max = o[i];
+					maxChar = i;
+				}
+			}
+			console.log(o);
+			console.log("出现最多的字符：", maxChar);
+			console.log("此字符的长度：", max);
+		</script>
+	</body>
+</html>

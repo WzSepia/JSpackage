@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>不借助任何第三方变量，实现整数交换</title>
+	</head>
+	<body>
+		<script type="text/javascript">
+			function numChange(x,y){
+				this.x = x;
+				this.y = y;
+				x = this.y;
+				y = this.x;
+				console.log(x,y);
+				return x,y
+			}
+			numChange(1,2);
+		</script>
+	</body>
+</html>
